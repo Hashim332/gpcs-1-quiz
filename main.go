@@ -18,7 +18,7 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
+	
 	// os.Stdout.Write(data)
-	fmt.Println(string(data))
-	fmt.Println("Hello, World!")
+	fmt.Println("%T/n", string(data))
 }
