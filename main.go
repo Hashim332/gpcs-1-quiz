@@ -1,8 +1,10 @@
 package main
 
 import (
+	"io"
+	"strings"
 	"fmt"
-	// "encoding/csv"
+	"encoding/csv"
 	"os"
 	"log"
 )
@@ -14,11 +16,31 @@ import (
 // print first line of csv and take input
 
 func main() {
-	data, err := os.ReadFile("./problems.csv")
+	// data, err := os.ReadFile("./problems.csv")
+	
+	in, err := os.ReadFile("./problems.csv")
 	if err != nil {
 		log.Fatal(err)
 	}
-	
-	// os.Stdout.Write(data)
-	fmt.Println("%T/n", string(data))
+
+
+	r := csv.NewReader(strings.NewReader(string(in)))
+
+	for {
+		record, err := r.Read()
+		if err == io.EOF {
+			break
+		}
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		fmt.Println(record)
+		fmt.Println(len(record))
+		// fmt.Println(record[0])
+		// fmt.Println(record[1])
+	}
+
+	// fmt.Printf("%T\n", data)
+	// fmt.Println(string(data))
 }
